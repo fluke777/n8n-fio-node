@@ -1,0 +1,89 @@
+{
+	"name": "n8n-nodes-fio",
+	"version": "0.1.0",
+	"description": "Fio API integration for n8n",
+	"license": "MIT",
+	"homepage": "https://github.com/fluke777/n8n-fio-node",
+	"keywords": [
+		"n8n-community-node-package"
+	],
+	"author": {
+		"name": "Tomas Svarovsky",
+		"email": "svarovsky.tomas@gmail.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/fluke777/n8n-nodes-fio.git"
+	},
+	"scripts": {
+		"build": "n8n-node build",
+		"build:watch": "tsc --watch",
+		"dev": "n8n-node dev",
+		"lint": "n8n-node lint",
+		"lint:fix": "n8n-node lint --fix",
+		"release": "n8n-node release",
+		"prepublishOnly": "n8n-node prerelease"
+	},
+	"files": [
+		"dist"
+	],
+	"n8n": {
+		"n8nNodesApiVersion": 1,
+		"strict": true,
+		"credentials": [
+			"dist/credentials/FioApi.credentials.js"
+		],
+		"nodes": [
+			"dist/nodes/Fio/Fio.node.js"
+		],
+		"icon": [
+			"dist/icons/fioLight.svg",
+			"dist/icons/fioDark.svg"
+		]
+	},
+	"devDependencies": {
+		"@n8n/node-cli": "*",
+		"@types/xml2js": "^0.4.14",
+		"eslint": "9.32.0",
+		"prettier": "3.6.2",
+		"release-it": "^19.0.4",
+		"typescript": "5.9.2",
+		"@release-it/conventional-changelog": "^10.0.2"
+	},
+	"peerDependencies": {
+		"n8n-workflow": "*"
+	},
+	"release-it": {
+		"git": {
+			"requireCleanWorkingDir": true,
+			"tagName": "v${version}",
+			"commitMessage": "chore(release): v${version}"
+		},
+		"github": {
+			"release": true,
+			"draft": false,
+			"prerelease": false
+		},
+		"npm": {
+			"publish": false
+		},
+		"plugins": {
+			"@release-it/conventional-changelog": {
+				"infile": "CHANGELOG.md",
+				"preset": {
+					"name": "conventionalcommits",
+					"types": [
+						{
+							"type": "feat",
+							"section": "Features"
+						},
+						{
+							"type": "fix",
+							"section": "Bug Fixes"
+						}
+					]
+				}
+			}
+		}
+	}
+}
